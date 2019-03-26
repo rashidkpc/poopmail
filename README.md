@@ -1,4 +1,4 @@
-![Poopmail Logo](https://raw.githubusercontent.com/rashidkpc/poopmail/master/poopmail.jpeg)
+![Poopmail Logo](https://raw.githubusercontent.com/rashidkpc/poopmail/master/poopmail.jpg)
 
 # poopmail
 A hacky node.js ad-hoc throw-away address mail forwarder. 
