@@ -7,7 +7,7 @@ TLDR; I wanted my own mailinator-like-thing that delivered mail to my email addr
 **Poopmail** is for people who really *really* hate email. If you've used mailinator you know what I mean. You need an email address, but maybe only for a day or two, and after that you never want to hear from that person/company/government/voice ever again. **Poopmail** can do that for you, forwarding directly to your own email address, without any user interface at all.
 
 #### How does it work?
-**Poopmail** uses patterns in email addresses you make up on the fly to determine whether or not it should forward an email on.
+**Poopmail** uses patterns in email addresses you make up on the fly to determine whether or not it should forward an email on to you, or if it should drop it and never tell you about it. Ever.
 
 Assuming you haven't done any hacking, `poopmail` will extract the first string of more than one number in to address and treat that as a YYMMDD (or YYMMDDHH, or YYMM, in that order) formatted date. Any mail that arrives before that date/time will be forwarded, anything after that date will be dropped. For example, if today was March 25th:
 
@@ -33,7 +33,7 @@ You need all the things below. If you don't know what any of these are, then you
 3. **A domain**. A subdomain would also work. So long as you can create `MX` records. If you've gotten this far you know where that `MX` records need to point right?
 
 ### Configuration
-It's all in `poopmail.json`. The minimum you have to configure is the `to` field. Go ahead and stick your email address in there. å
+It's all in `poopmail.json`. The minimum you have to configure is the `to` field. Go ahead and stick your email address in there. 
 
 ### Running
 
