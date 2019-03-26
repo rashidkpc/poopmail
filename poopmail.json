@@ -1,0 +1,4 @@
+{
+  "to": "your@email.here",
+  "dateformats": ["YYMMDD", "YYMMDDHH", "YYMM"]
+}
