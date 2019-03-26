@@ -1,6 +1,5 @@
 ![Poopmail Logo](https://raw.githubusercontent.com/rashidkpc/poopmail/master/poopmail.jpg)
 
-# poopmail
 A hacky node.js ad-hoc throw-away address mail forwarder. 
 
 TLDR; I wanted my own mailinator-like-thing that delivered mail to my email address but didn't require any maintenance at all. Behold: **poopmail**
