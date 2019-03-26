@@ -15,6 +15,7 @@
     "smtp-server": "^3.5.0"
   },
   "devDependencies": {
+    "eslint": "^5.15.3",
     "nodemon": "^1.18.10"
   }
 }
