@@ -4,7 +4,10 @@
   "description": "For shitty mail",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js"
+    "dev": "nodemon poopmail.js",
+    "start": "pm2 start poopmail.js",
+    "status": "pm2 status",
+    "stop": "pm2 stop poopmail" 
   },
   "author": "",
   "license": "ISC",
@@ -16,6 +19,7 @@
   },
   "devDependencies": {
     "eslint": "^5.15.3",
-    "nodemon": "^1.18.10"
+    "nodemon": "^1.18.10",
+    "pm2": "^3.4.1"
   }
 }
