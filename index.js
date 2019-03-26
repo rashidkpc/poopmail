@@ -10,13 +10,13 @@ const server = new SMTPServer({
   // disable STARTTLS to allow authentication in clear text mode
   disabledCommands: ["STARTTLS", "AUTH"],
   logger: config.debug,
-  onData(stream) {
+  onData(stream, session, callback) {
     simpleParser(stream).then(parsed => {
       const { from, to, subject, html, text, attachments } = parsed;
       const address = to.value[0].address;
 
       if (config.debug) {
-        console.log(JSON.stringify(parsed, null, " "));
+        console.log("INCOMING EMAIL", JSON.stringify(parsed, null, " "));
       }
 
       const incoming = {
@@ -34,35 +34,35 @@ const server = new SMTPServer({
         subject,
         text,
         html,
-        attachments: attachments.map(att => ({
-          filename: att.filename,
-          content: new Buffer(att.content.data)
-        }))
+        attachments: attachments || []
       };
 
       function act(decision) {
         if (decision === true) {
           sendmail(outgoing);
+          if (config.debug) console.log("FORWARDED EMAIL", address);
+          return "Accepted";
         }
         if (decision === false) {
-          if (!config.debug) return decision;
-          console.log(
-            `Dropping mail to ${address} from ${from.value[0].address}`
-          );
+          if (config.debug) {
+            console.log(
+              "REJECTED EMAIL",
+              `to ${address} from ${from.value[0].address}`
+            );
+          }
+          return new Error("Rejected");
         }
-        return decision;
       }
 
       for (let plugin of plugins) {
         const decision = plugin(incoming);
         if (decision === true || decision === false) {
-          act(outgoing);
-          return decision;
+          return callback(null, act(outgoing));
         }
       }
 
       // No decision
-      return act(config.default_accept);
+      callback(null, act(config.default_accept));
     });
   }
 });
