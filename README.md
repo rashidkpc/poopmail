@@ -42,4 +42,16 @@ node index.js
 ```
 
 ### Hacking
-You can also hack up `forward.js` with whatever logic you want. You'll get the full email address that the mail was sent to. Return `true` to forward, `false` to drop. Shocking right?
+I bet you saw that `plugins/` directory didn't you. So how does that work? See `plugins/index.js`? That contains an array of functions. Each of those functions will receive the email sent. The first function to return `true` (forward the email) or `false` (don't forward the email) deterimes the fate of the email. Return anything else (I suggest `null`), and **poopmail** will move onto the next function. If nothing returns `true` or `false` then the value of `default_accept` (default: `false`) from `poopmail.json` will be used.
+
+The format of the email object passed into the functions looks like this. I think the names are pretty self explanitory right?:
+
+```
+incoming = {
+  from
+  to,
+  subject,
+  text,
+  html,
+};
+```
