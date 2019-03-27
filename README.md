@@ -2,10 +2,10 @@
 
 A hacky node.js ad-hoc throw-away address mail forwarder. 
 
-TLDR; I wanted my own mailinator-like-thing that delivered mail to my email address but didn't require any maintenance at all. Behold: **poopmail**
+TLDR; I wanted my own mailinator-like-thing that delivered mail to my email address but didn't require any maintenance at all. Behold: **poopmail**. This is basically abandon-ware, I use it, you can use it if you want. If it doesn't work, fix it and submit a pull. 
 
 #### Who is this for?
-**Poopmail** is for people who really *really* hate email. If you've used mailinator you know what I mean. You need an email address, but maybe only for a day or two, and after that you never want to hear from that person/company/government/voice ever again. **Poopmail** can do that for you, forwarding directly to your own email address, without any user interface at all.
+**Poopmail** is for people who really *really* hate email, but for some idiotic reason also don't want to use some other service for temporary emails. If you've used mailinator you know what I mean. You need an email address, but maybe only for a day or two, and after that you never want to hear from that person/company/government/voice ever again. **Poopmail** can do that for you, forwarding directly to your own email address, without any user interface at all.
 
 #### How does it work?
 **Poopmail** uses patterns in email addresses you make up on the fly to determine whether or not it should forward an email on to you, or if it should drop it and never tell you about it. Ever.
@@ -41,6 +41,7 @@ It's all in `poopmail.json`. The minimum you have to configure is the `to` field
 3. Set `default_accept` to what you want to happen if the email is not accepted by the date filter parser thing (or any other plugin). You almost certainly want this to be `false`, especially with the default plugin set. Otherwise you'll get a TON of garbage. 
 
 ### Running
+You probably need Node.js 10. Probably. Look, I don't know, you should probably know something or another about deploying Node.js apps. Probably. Don't ask me. 
 
 ```
 node index.js
