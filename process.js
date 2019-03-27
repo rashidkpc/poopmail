@@ -2,6 +2,7 @@ const config = require("./poopmail.json");
 const sendmail = require("sendmail")({ silent: !config.debug });
 const plugins = require("./plugins");
 
+// Returns true or false depending on if the email was ultimately forward to anyone
 module.exports = incoming => {
   const address = incoming.to;
   const { subject, text, html, attachments, from } = incoming;

@@ -34,7 +34,11 @@ You need all the things below. If you don't know what any of these are, then you
 3. **A domain**. A subdomain would also work. So long as you can create `MX` records. If you've gotten this far you know where that `MX` records need to point right?
 
 ### Configuration
-It's all in `poopmail.json`. The minimum you have to configure is the `to` field. Go ahead and stick your email address in there. 
+It's all in `poopmail.json`. The minimum you have to configure is the `to` field. Go ahead and stick your email address in there.
+
+1. Set `to` to the email address you wish to forward mail to.
+2. Set `domains` to a `["list.of", "domains.com" ]` that you have MX records for and you want **poopmail** to handle.
+3. Set `default_accept` to what you want to happen if the email is not accepted by the date filter parser thing (or any other plugin). You almost certainly want this to be `false`, especially with the default plugin set. Otherwise you'll get a TON of garbage. 
 
 ### Running
 
@@ -43,9 +47,11 @@ node index.js
 ```
 
 ### Hacking
-I bet you saw that `plugins/` directory didn't you. So how does that work? See `plugins/index.js`? That contains an array of functions. Each of those functions will receive the email sent. The first function to return `true` (forward the email) or `false` (don't forward the email) deterimes the fate of the email. Return anything else (I suggest `null`), and **poopmail** will move onto the next function. If nothing returns `true` or `false` then the value of `default_accept` (default: `false`) from `poopmail.json` will be used.
+I bet you saw that `plugins/` directory didn't you? So how does that work? See `plugins/index.js`? That contains an array of functions. Each of those functions will receive the email sent. The first function to return `true` (forward the email) or `false` (don't forward the email) deterimes the fate of the email. Return anything else (I suggest `null`), and **poopmail** will move onto the next function. 
 
-The format of the email object passed into the functions looks like this. I think the names are pretty self explanitory right?:
+You'll notice that the last plugin is called `finally`. `finally` returns the value of `default_accept` (default: `false`) from `poopmail.json`. Like I said above, you almost certainly want to leave that as `false`
+
+The format of the email object passed into the functions looks like this. I think the names are pretty self explanitory right?
 
 ```
 incoming = {
@@ -56,3 +62,6 @@ incoming = {
   html,
 };
 ```
+
+Good luck. It's your email so if you screw something up it's your problem. But then, it's email you didn't care about anyway, right?
+

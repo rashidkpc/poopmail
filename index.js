@@ -8,8 +8,6 @@ const server = new SMTPServer({
   disabledCommands: ["STARTTLS", "AUTH"],
   logger: config.debug,
   onData(stream, session, callback) {
-    callback(null, "Accepted"); // We accept everything
-
     simpleParser(stream).then(parsed => {
       const { from, to, subject, html, text, attachments } = parsed;
 
@@ -17,7 +15,7 @@ const server = new SMTPServer({
         console.log("INCOMING EMAIL", JSON.stringify(parsed, null, " "));
       }
 
-      to.value.forEach(recp =>
+      const results = to.value.map(recp =>
         processEmail({
           from: from.value[0].address,
           to: recp.address,
@@ -27,6 +25,14 @@ const server = new SMTPServer({
           attachments
         })
       );
+
+      if (results.includes(true)) {
+        callback(null, "Accepted");
+      } else {
+        const err = new Error("Rejected");
+        err.responseCode = 541;
+        callback(err);
+      }
     });
   }
 });
