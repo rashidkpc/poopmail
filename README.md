@@ -34,7 +34,7 @@ You need all the things below. If you don't know what any of these are, then you
 3. **A domain**. A subdomain would also work. So long as you can create `MX` records. If you've gotten this far you know where that `MX` records need to point right?
 
 ### Configuration
-It's all in `poopmail.json`. The minimum you have to configure is the `to` field. Go ahead and stick your email address in there.
+Copy `poopmail.json.sample` to `poopmail.json`. Then:
 
 1. Set `to` to the email address you wish to forward mail to.
 2. Set `domains` to a `["list.of", "domains.com" ]` that you have MX records for and you want **poopmail** to handle.
